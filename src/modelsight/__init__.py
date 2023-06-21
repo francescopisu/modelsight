@@ -1,3 +1,11 @@
 # read version from installed package
 from importlib.metadata import version
-__version__ = version("modelsight")
+
+from src.modelsight import calibration
+
+__all__ = [
+    "calibration"
+]
+
+# __version__ = version("modelsight")
+

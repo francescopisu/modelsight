@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+envs/
+*_backup.toml
+
 # Distribution / packaging
 .Python
 build/
