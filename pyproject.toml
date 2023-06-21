@@ -5,12 +5,30 @@ description = "Better insights into Machine Learning models performance"
 authors = ["Francesco Pisu"]
 license = "GNU General Public License v3.0"
 readme = "README.md"
+classifiers = [
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "~3.10"
+interpret = "^0.4.2"
+scikit-learn = "^1.2.2"
+matplotlib = "^3.7.1"
+pandas = "^2.0.2"
+mlxtend = "^0.2.2"
+dynaconf = "^3.1.11"
+"scikits.bootstrap" = "^1.1.0"
+conda-lock = "^2.1.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.test.dependencies]
+pytest = "^7.3.2"
+pytest-cov = "4.1.0"
+
+[tool.poetry.group.dev.dependencies]
+jupyterlab = "^4.0.2"
+typing-extensions = "^4.6.3"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

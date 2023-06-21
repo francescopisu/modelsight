@@ -17,4 +17,4 @@ platforms:
   - osx-arm64
   - osx-64
 
-prefix: ./modelsight_venv
+prefix: ./envs/modelsight_venv
