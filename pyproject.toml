@@ -28,7 +28,11 @@ pytest-cov = "4.1.0"
 [tool.poetry.group.dev.dependencies]
 jupyterlab = "^4.0.2"
 typing-extensions = "^4.6.3"
+python-semantic-release = "^7.34.6"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.semantic_release]
+version_variable = "pyproject.toml:version"
