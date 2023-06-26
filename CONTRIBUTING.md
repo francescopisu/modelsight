@@ -42,22 +42,35 @@ If you are proposing a feature:
 
 Ready to contribute? Here's how to set up `modelsight` for local development.
 
-1. Download a copy of `modelsight` locally.
-2. Install `modelsight` using `poetry`:
+
+1. Clone the repository:
+   ```console
+   $ git clone https://github.com/francescopisu/modelsight
+   ```
+
+2. Create and activate a conda environment using the correct lock file based on your OS:
+   
+    ```console
+    $ cd modelsight
+    $ conda create --prefix ./envs/modelsight_env --file conda-osx-arm64.lock
+    $ conda activate ./envs/modelsight_env
+    ```
+
+3. Install dependencies using `poetry`:
 
     ```console
     $ poetry install
     ```
 
-3. Use `git` (or similar) to create a branch for local development and make your changes:
+4. Use `git` (or similar) to create a branch for local development and make your changes:
 
     ```console
     $ git checkout -b name-of-your-bugfix-or-feature
     ```
 
-4. When you're done making changes, check that your changes conform to any code formatting requirements and pass any tests.
+5. When you're done making changes, check that your changes conform to any code formatting requirements and pass any tests (required).
 
-5. Commit your changes and open a pull request.
+6. Commit your changes and open a pull request.
 
 ## Pull Request Guidelines
 
