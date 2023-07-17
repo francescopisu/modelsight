@@ -2,9 +2,9 @@
 
 Better insights into Machine Learning models performance.
 
-Modelsight is a collection of functions that create publication-ready graphics for the visual evaluation of your binary classifiers. 
+Modelsight is a collection of functions that create publication-ready graphics for the visual evaluation of binary classifiers adhering to the scikit-learn interface. 
 
-It is strongly oriented towards the evaluation of already fitted `ExplainableBoostingClassifier` of the [interpretml](https://github.com/interpretml/interpret) package.
+Modelsight is strongly oriented towards the evaluation of already fitted `ExplainableBoostingClassifier` of the [interpretml](https://github.com/interpretml/interpret) package.
 
 ## Installation
 ```console
@@ -12,7 +12,6 @@ $ pip install modelsight
 ```
 
 ## Usage
-
 See the [example](/docs/example.ipynb) notebook. 
 
 ## Contributing
@@ -22,6 +21,13 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 ## License
 
 `modelsight` was created by Francesco Pisu. It is licensed under the terms of the GNU General Public License v3.0 license.
+
+## Roadmap
+- Features
+[] Average ROC and PR curves
+[] Feature importance (Global explanation)
+[] Individualized explanations (Local explanation)
+
 
 ## Credits
 
