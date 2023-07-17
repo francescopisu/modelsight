@@ -23,11 +23,14 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 `modelsight` was created by Francesco Pisu. It is licensed under the terms of the GNU General Public License v3.0 license.
 
 ## Roadmap
-- Features
-[] Average ROC and PR curves
-[] Feature importance (Global explanation)
-[] Individualized explanations (Local explanation)
+Features:
+- [x] Average Receiver-operating characteristic curves
+- [ ] Average Precision-recall curves
+- [ ] Feature importance (Global explanation)
+- [ ] Individualized explanations (Local explanation)
 
+CI/CD:
+- [ ] Integration with GH Actions
 
 ## Credits
 
