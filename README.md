@@ -77,6 +77,16 @@ errors = []
 correct = []
 features = []
 
+ts = datetime.timestamp(datetime.now())
+cv_config = {
+    "N_REPEATS": 10,
+    "N_SPLITS": 10,
+    "SHUFFLE": True,
+    "SCALE": False,
+    "CALIBRATE": True,
+    "CALIB_FRACTION": 0.15,
+}
+
 for i, (train_idx, val_idx) in enumerate(outer_cv.split(X, y)):
     Xtemp, ytemp = X.iloc[train_idx, :], y.iloc[train_idx]
     Xval, yval = X.iloc[val_idx, :], y.iloc[val_idx]
