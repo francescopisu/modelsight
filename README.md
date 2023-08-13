@@ -1,4 +1,4 @@
-<img src="https://github.com/francescopisu/modelsight/tree/main/docs/images/modelsight-logo.svg" width="175" align="right" />
+<img src="https://github.com/francescopisu/modelsight/blob/main/docs/images/modelsight-logo.svg" width="175" align="right" />
 
 # Welcome to modelsight
 
