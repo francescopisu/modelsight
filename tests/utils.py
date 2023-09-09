@@ -9,12 +9,12 @@ from interpret.glassbox import ExplainableBoostingClassifier
 from modelsight._typing import CVModellingOutput, CVScheme, Estimator, ArrayLike, SeedType
 
 
-def get_model(seed: SeedType) -> Estimator:
-    return ExplainableBoostingClassifier(random_state=seed,
-                                         interactions=6,
-                                         learning_rate=0.02,
-                                         min_samples_leaf=5,
-                                         n_jobs=4)
+# def get_model(seed: SeedType) -> Estimator:
+    # return ExplainableBoostingClassifier(random_state=seed,
+    #                                      interactions=6,
+    #                                      learning_rate=0.02,
+    #                                      min_samples_leaf=5,
+    #                                      n_jobs=4)
 
 
 def get_calibrated_model(model: Estimator, 
