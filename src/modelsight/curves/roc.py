@@ -178,4 +178,4 @@ def average_roc_curves(cv_preds: Dict[str, CVModellingOutput],
                   fontweight="bold",
                   position=(0.4, 0.5))
 
-    return fig, ax, ins, bars, auc_cis
+    return fig, ax, ins, bars, all_data

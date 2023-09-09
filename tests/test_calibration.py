@@ -27,4 +27,3 @@ def test_calibration_plot(ground_truths, probas):
                                  brier_score_annot="",
                                  ax=None
                                  )
-    plt.show()
