@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "modelsight"
-version = "0.2.0"
+version = "0.3.0"
 description = "Better insights into Machine Learning models performance"
 authors = ["Francesco Pisu"]
 license = "GNU General Public License v3.0"

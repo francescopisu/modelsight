@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (14/09/2023)
+
+### Features
+
+- Added the possibility to make statistical comparison between areas under curve of different models in the ROC plot.
+- Updated the pytest's `cv_results` fixture to cross-validate multiple models.
+
+
 ## v0.2.0 (17/07/2023)
 
 ### Feature
