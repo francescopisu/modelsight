@@ -1,0 +1,115 @@
+name: ci-cd
+
+on: [push, pull_request]
+
+jobs:
+    ci:
+        # set up os
+        runs-on: ubuntu-latest
+
+        # define job steps
+        steps:
+            - name: Set up Python 3.10
+              uses: actions/setup-python@v3
+              with:
+                python-version: "3.10"
+                architecture: "x64"
+              env:
+                AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
+            
+            - name: Check-out repository
+              uses: actions/checkout@v4
+            
+            - name: Install poetry
+              uses: snok/install-poetry@v1
+            
+            - name: Install package
+              run: poetry install
+            
+            - name: Execute tests
+              run: poetry run python -m pytest -v tests/ --cov=src --cov-report=xml -rP
+            
+            - name: Upload coverage reports to Codecov
+              uses: codecov/codecov-action@v3
+              with:
+                files: ./coverage.xml
+
+            - name: Build documentation
+              run: poetry run make html --directory docs/
+    cd:
+        needs: ci
+
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        
+        runs-on: ubuntu-latest
+        concurrency: release
+        permissions:
+            id-token: write
+            contents: write
+
+        steps:
+            - name: Set up Python 3.10
+              uses: actions/setup-python@v3
+              with:
+                python-version: "3.10"
+                architecture: "x64"
+              env:
+                AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
+            
+            - name: Check-out repository
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+            
+            - name: Install poetry
+              uses: snok/install-poetry@v1
+            
+            - name: Install package
+              run: poetry install
+            
+            - name: Use Python Semantic Release to prepare release
+              env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config user.name github-actions
+                  git config user.email github-actions@github.com
+                  poetry run semantic-release publish
+            
+            - name: Check if semantic-release-python created a new release
+              id: check_new_release
+              run: |
+                latest_tag=$(git describe --abbrev=0 --tags)
+                previous_tag=$(git describe --abbrev=0 --tags $latest_tag^)
+                echo "Latest Tag: $latest_tag"
+                echo "Previous Tag: $previous_tag"
+
+                if [ "$latest_tag" != "$previous_tag" ]; then
+                    echo "New Git tag detected"
+                    echo "::set-output name=new_version::true"
+                else
+                    echo "No new Git tag detected"
+                    echo "::set-output name=new_version::false"
+                fi                
+            
+            - name: Publish to TestPyPi
+              if: steps.check_new_release.outputs.new_version == 'true'
+              uses: pypa/gh-action-pypi-publish@release/v1
+              with:
+                user: __token__
+                password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+                repository_url: https://test.pypi.org/legacy/
+            
+            - name: Test install from TestPyPI
+              if: steps.check_new_release.outputs.new_version == 'true'
+              run: |
+                pip install \
+                --index-url https://test.pypi.org/simple/ \
+                --extra-index-url https://pypi.org/simple \
+                modelsight
+
+            - name: Publish to PyPI
+              if: steps.check_new_release.outputs.new_version == 'true'
+              uses: pypa/gh-action-pypi-publish@release/v1
+              with:
+                user: __token__
+                password: ${{ secrets.PYPI_API_TOKEN }}
