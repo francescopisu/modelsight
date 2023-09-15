@@ -73,26 +73,9 @@ jobs:
               run: |
                   git config user.name github-actions
                   git config user.email github-actions@github.com
-                  poetry run semantic-release publish
-            
-            - name: Check if semantic-release-python created a new release
-              id: check_new_release
-              run: |
-                latest_tag=$(git describe --abbrev=0 --tags)
-                previous_tag=$(git describe --abbrev=0 --tags $latest_tag^)
-                echo "Latest Tag: $latest_tag"
-                echo "Previous Tag: $previous_tag"
-
-                if [ "$latest_tag" != "$previous_tag" ]; then
-                    echo "New Git tag detected"
-                    echo "::set-output name=new_version::true"
-                else
-                    echo "No new Git tag detected"
-                    echo "::set-output name=new_version::false"
-                fi                
+                  poetry run semantic-release publish               
             
             - name: Publish to TestPyPi
-              if: steps.check_new_release.outputs.new_version == 'true'
               uses: pypa/gh-action-pypi-publish@release/v1
               with:
                 user: __token__
@@ -100,7 +83,6 @@ jobs:
                 repository_url: https://test.pypi.org/legacy/
             
             - name: Test install from TestPyPI
-              if: steps.check_new_release.outputs.new_version == 'true'
               run: |
                 pip install \
                 --index-url https://test.pypi.org/simple/ \
@@ -108,7 +90,6 @@ jobs:
                 modelsight
 
             - name: Publish to PyPI
-              if: steps.check_new_release.outputs.new_version == 'true'
               uses: pypa/gh-action-pypi-publish@release/v1
               with:
                 user: __token__
