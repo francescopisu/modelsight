@@ -224,8 +224,6 @@ def roc_single_comparison(cv_preds, fst_algo, snd_algo):
     fst_algo_probas = cv_preds[fst_algo].probas_val_conc
     snd_algo_probas = cv_preds[snd_algo].probas_val_conc
     
-    print("A"*100)
-    print(fst_algo_probas.shape, snd_algo_probas.shape)
     P = delong_roc_test(ground_truths, fst_algo_probas, snd_algo_probas)
     cmp_key = f"{fst_algo}_{snd_algo}"
     return {cmp_key: (fst_algo, snd_algo, P)}
