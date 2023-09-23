@@ -1,3 +1,8 @@
+"""
+This file deals with the implementation of the Hosmer-Lemeshow plot for the
+assessment of calibration of predicted probabilities.
+"""
+
 import numpy as np
 from typing import Tuple
 import matplotlib.pyplot as plt
@@ -6,11 +11,14 @@ from src.modelsight._typing import ArrayLike
 
 
 def ntile_name(n: int) -> str:
-    """Returns the ntile name corresponding to an ntile integer.
+    """
+    Returns the ntile name corresponding to an ntile integer.
+    
     Parameters
     ----------
     n : int
         An ntile integer.
+    
     Returns
     -------
     ntile_name : str
@@ -30,13 +38,16 @@ def ntile_name(n: int) -> str:
 
 def make_recarray(y_true: ArrayLike,
                   y_pred: ArrayLike) -> np.recarray:
-    """Combines arrays into a recarray.
+    """
+    Combines arrays into a recarray.
+    
     Parameters
     ----------
     y_true : array
         Observed labels, either 0 or 1.
     y_pred : array
         Predicted probabilities, floats on [0, 1].
+    
     Returns
     -------
     table : recarray
@@ -53,7 +64,9 @@ def make_recarray(y_true: ArrayLike,
 def hosmer_lemeshow_table(y_true: ArrayLike,
                           y_pred: ArrayLike,
                           n_bins: int = 10) -> np.recarray:
-    """Constructs a Hosmer–Lemeshow table.
+    """
+    Constructs a Hosmer–Lemeshow table.
+    
     Parameters
     ----------
     y_true : array
@@ -63,6 +76,7 @@ def hosmer_lemeshow_table(y_true: ArrayLike,
     n_bins : int, optional
         The number of groups to create. The default value is 10, which
         corresponds to deciles of predicted probabilities.
+    
     Returns
     -------
     table : recarray
@@ -100,26 +114,28 @@ def hosmer_lemeshow_plot(y_true: ArrayLike,
 
     Parameters
     ----------
-    y_true: ArrayLike
+    y_true : ArrayLike
         (n_obs,) shaped array of ground-truth values
-    y_pred: ArrayLike
+    y_pred : ArrayLike
         (n_obs,) shaped array of predicted probabilities
-    n_bins: int
+    n_bins : int
         Number of bins to group observed and predicted probabilities into
-    colors: Tuple[str, str]
+    colors : Tuple[str, str]
         Pair of colors for observed (line) and predicted (vertical bars) probabilities.
-    annotate_bars: bool
+    annotate_bars : bool
         Whether bars should be annotated with the number of observed probabilities in each bin.
-    title: str
+    title : str
         Title to display on top of the calibration plot.
-    brier_score_annot: str
+    brier_score_annot : str
         Optional brier score (95% CI) annotation on the top-left corner.
-    ax: plt.Axes
+    ax : plt.Axes
         A matplotlib Axes object to draw the calibration plot into. If None, an Axes object is created by default.
+    
     Returns
     -------
-    Tuple[plt.Figure, plt.Axes]:
-        Corresponding figure and Axes
+    f, ax : Tuple[plt.Figure, plt.Axes]
+        f: pyplot figure
+        ax: pyplot Axes
     """
     table = hosmer_lemeshow_table(y_true, y_pred, n_bins)
     # transform observed and predicted frequencies in percentage relative to the bin dimension
