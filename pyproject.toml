@@ -20,6 +20,7 @@ mlxtend = "^0.2.2"
 dynaconf = "^3.1.11"
 "scikits.bootstrap" = "^1.1.0"
 conda-lock = "^2.1.0"
+python-semantic-release = "^8.1.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.3.2"
@@ -28,7 +29,7 @@ pytest-cov = "4.1.0"
 [tool.poetry.group.dev.dependencies]
 jupyterlab = "^4.0.2"
 typing-extensions = "^4.6.3"
-python-semantic-release = "^7.34.6"
+python-semantic-release = "^8.1.1"
 myst-nb = {version = "^0.17.2", python = "~3.10"}
 sphinx-autoapi = "^2.1.1"
 sphinx-rtd-theme = "^1.2.2"
@@ -38,13 +39,15 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
-version_variable = "pyproject.toml:version" # version location
+version_toml = ["pyproject.toml:tool.poetry.version"] # version location
 version_source = "tag"
+commit_version_numer = true 
+commit_message = "chore(release): v{version} [skip ci]"
 branch = "main"                             # branch to make releases of
 changelog_file = "CHANGELOG.md"             # changelog file
 build_command = "poetry build"              # build dists
 dist_path = "dist/"                         # where to put dists
-upload_to_release = true                    # auto-create GitHub release
+upload_to_vcs_release = true                    # auto-create GitHub release
 upload_to_pypi = false                      # don't auto-upload to PyPI
 remove_dist = false                         # don't remove dists
 patch_without_tag = true                    # patch release by default
