@@ -1,5 +1,5 @@
-from src.modelsight.curves.roc import average_roc_curves
-from src.modelsight.curves.compare import (
+from .roc import average_roc_curves
+from .compare import (
     roc_single_comparison, roc_comparisons,
     add_annotations
 )

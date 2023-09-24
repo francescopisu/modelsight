@@ -7,7 +7,7 @@ import numpy as np
 from typing import Tuple
 import matplotlib.pyplot as plt
 
-from src.modelsight._typing import ArrayLike
+from modelsight._typing import ArrayLike
 
 
 def ntile_name(n: int) -> str:
