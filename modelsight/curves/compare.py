@@ -8,8 +8,8 @@ import matplotlib
 from matplotlib import patches
 import matplotlib.pyplot as plt
 
-from src.modelsight.curves._delong import delong_roc_test
-from src.modelsight._typing import CVModellingOutput
+from modelsight.curves._delong import delong_roc_test
+from modelsight._typing import CVModellingOutput
 
 def annot_stat_vertical(text:str, 
                         x: float, 

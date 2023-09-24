@@ -6,7 +6,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
 from scikits.bootstrap import bootstrap_indices as scikits_boot_indices
 
-from src.modelsight._typing import CVModellingOutput, SeedType
+from modelsight._typing import CVModellingOutput, SeedType
 
 
 def average_roc_curves(cv_preds: Dict[str, CVModellingOutput],
